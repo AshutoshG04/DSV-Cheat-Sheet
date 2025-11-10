@@ -1,0 +1,45 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv(r"diabetes.csv")
+df
+
+df = df.drop(columns=['Pregnancies', 'SkinThickness',
+                      'DiabetesPedigreeFunction', 'Insulin', 'Outcome'])
+df
+
+df = df.drop(df.index[10:])    # keep only first 10 rows
+df
+
+df.plot(kind='line', color=['red','blue','brown','green'])
+plt.title('Features responsible for diabetes')
+plt.xlabel('Observations')
+plt.ylabel('Values')
+plt.show()
+
+df.plot(kind='bar', title='Diabetes Prediction')
+plt.xlabel('Observations')
+plt.ylabel('Values')
+plt.show()
+
+df.plot(kind='hist', title='Diabetes Prediction')
+plt.show()
+
+df.plot(kind='pie', y='Glucose', title='Diabetes Predictions',
+        legend=False, autopct="%.2f%%")
+plt.show()
+
+df.plot(kind='box')
+plt.title('Diabetes Prediction')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.show()
+
+x = df['Age']
+y = df['Glucose']
+plt.scatter(x, y)
+plt.title('Diabetes Prediction')
+plt.xlabel('Age')
+plt.ylabel('Glucose')
+plt.show()

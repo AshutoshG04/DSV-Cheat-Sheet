@@ -1,0 +1,59 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the Titanic dataset
+df = pd.read_csv(r"D:\DSV_Datadaset\titanic\train.csv")
+
+# Display first few rows
+print(df.head())
+
+# Display info and statistics
+print(df.info())
+print(df.describe())
+
+sns.countplot(x='Survived', data=df)
+plt.title('Survival Distribution')
+plt.xlabel('Survived')
+plt.ylabel('Count')
+plt.show()
+
+sns.countplot(x='Pclass', data=df)
+plt.title('Passenger Class Distribution')
+plt.xlabel('Pclass')
+plt.ylabel('Count')
+plt.show()
+
+sns.histplot(x='Age', data=df, color='skyblue')
+plt.title('Age Distribution')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.show()
+
+sns.barplot(x='Sex', y='Survived', data=df)
+plt.title('Survival Rate by Gender')
+plt.xlabel('Sex')
+plt.ylabel('Survival Rate')
+plt.show()
+
+sns.barplot(x='Pclass', y='Survived', data=df)
+plt.title('Survival Rate by Passenger Class')
+plt.xlabel('Pclass')
+plt.ylabel('Survival Rate')
+plt.show()
+
+sns.boxplot(x='Survived', y='Fare', data=df)
+plt.title('Fare vs Survival')
+plt.xlabel('Survived')
+plt.ylabel('Fare')
+plt.show()
+
+sns.scatterplot(x='Age', y='Fare', hue='Survived', style='Pclass', data=df)
+plt.title('Survival Rate by Age and Passenger Class')
+plt.xlabel('Age')
+plt.ylabel('Fare')
+plt.show()
+
+sns.pairplot(df[['Age', 'Fare', 'Pclass', 'Survived']], hue='Survived')
+plt.title('Pairplot of Selected Features')
+plt.show()

@@ -1,0 +1,33 @@
+import pandas as pd
+df = pd.read_csv("Titanic-Dataset.csv")
+df.head()  # Displays first 5 rows
+
+df = df[['Survived', 'Pclass', 'Sex', 'Age']]
+df
+
+df['Age'].fillna(df['Age'].median(), inplace=True)
+df
+
+from sklearn.model_selection import train_test_split
+
+X = df[['Pclass', 'Sex', 'Age']]
+y = df['Survived']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+df['Sex'] = df['Sex'].map({'male': 0, 'female': 1})
+df
+
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+y_pred = model.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+probabilities = model.predict_proba(X_test)[:, 1]
+print("Predicted Probabilities of Survival:\n", probabilities)
